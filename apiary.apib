@@ -1,0 +1,94 @@
+FORMAT: 1A
+HOST: http://retail.oracle.org/
+
+# Order API
+
+Allows clients to query for order information. Clients can decide if they want 
+to receive all the details for the particular order or just the summary. 
+
+## Orders [/orders]
+
+### Get All Orders [GET]
+Returns all orders information
+
++ Response 200 (application/json)
+
+        [
+            {
+                "orderid": "1000",
+                "name": "Samsung 27 inches Widescreen LED Monitor, Black",
+                "price": "$189.99",
+            },
+            {
+                "orderid": "2000",
+                "name": "HP LaserJet Pro M402dn Monochrome Laser Printer",
+                "price": "$199.99",
+            },
+            {
+                "orderid": "3000",
+                "name": "Logitech® K350 Wireless Keyboard, Black",
+                "price": "$61.99",
+            }
+        ]
+
+## Order Details [/order/details/{item}]
+
+### Get order details [GET]
+Returns all details for a specific order
+
++ Parameters
+    + item (number) - Order item number.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "userName": "Patrick Shepherd",
+                "po_id": "1000",
+                "reference_no": "20",
+                "remarks": "200",
+                "po_date": "Aug 6, 2016 9:58:28 PM",
+                "order_type": "PENDING",
+                "itemList": 
+                    {
+                        "gl_dimension_pkids": "1001,1002",
+                        "gl_dimension_code": "XYZ,ABC",
+                        "gl_code_reference": "anything",
+                        "gl_code": "XYZ",
+                        "item": "1000",
+                        "item_type": "INV",
+                        "qty": "10",
+                        "unit_price": "$189.99"
+                    },
+                    {
+                        "gl_dimension_pkids": "1001,1002",
+                        "gl_dimension_code": "XYZ,ABC",
+                        "gl_code_reference": "anything",
+                        "gl_code": "XYZ",
+                        "item": "2000",
+                        "item_type": "INV",
+                        "qty": "5",
+                        "unit_price": "$199.99"
+                    }
+            }
+        ]
+
+
+## Order Summary [/order/summary/{item}]
+
+### Get order Summary [GET]
+Returns only a summary of the order (name, price and summary).
+
++ Parameters
+    + item (number) - Order item number.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "item": "1000",
+                "name": "Samsung S27E310H 27” Widescreen LED Monitor, Black",
+                "price":"189.99",
+                "summary": "Games, movies, Web surfing and viewing photos are all more fun with a crystal clear screen."
+            }
+        ]
